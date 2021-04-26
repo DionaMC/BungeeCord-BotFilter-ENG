@@ -394,8 +394,8 @@ public class BotFilter
         Logger logger = BungeeCord.getInstance().getLogger();
         try
         {
-            logger.log( Level.INFO, "[BotFilter] Проверяю наличее обновлений" );
-            URL url = new URL( "https://raw.githubusercontent.com/Leymooo/BungeeCord/master/version.txt" );
+            logger.log( Level.INFO, "[BotFilter] Checking for updates..." );
+            URL url = new URL( "https://raw.githubusercontent.com/Loyisa/BungeeCord/master/version.txt" );
             URLConnection conn = url.openConnection();
             conn.setConnectTimeout( 1200 );
             conn.setReadTimeout( 1200 );
@@ -405,21 +405,21 @@ public class BotFilter
                 if ( !in.readLine().trim().equalsIgnoreCase( Settings.IMP.BOT_FILTER_VERSION ) )
                 {
 
-                    logger.log( Level.INFO, "§c[BotFilter] §aНайдена новая версия!" );
-                    logger.log( Level.INFO, "§c[BotFilter] §aПожалуйста обновитесь!" );
-                    logger.log( Level.INFO, "§c[BotFilter] §ahttp://rubukkit.org/threads/137038" );
+                    logger.log( Level.INFO, "§c[BotFilter] §aNew update available!");
+                    logger.log( Level.INFO, "§c[BotFilter] §aPlease update to latest version!");
+                    logger.log( Level.INFO, "§c[BotFilter] §aDownload from Github: https://github.com/Loyisa/BungeeCord/releases/");
                     if ( startup )
                     {
                         Thread.sleep( 3500L );
                     }
                 } else
                 {
-                    logger.log( Level.INFO, "[BotFilter] Обновлений не найдено!" );
+                    logger.log( Level.INFO, "[BotFilter] You are using the latest version!" );
                 }
             }
         } catch ( IOException | InterruptedException ex )
         {
-            logger.log( Level.WARNING, "[BotFilter] Не могу проверить обновление", ex );
+            logger.log( Level.WARNING, "[BotFilter] Can't check the update", ex );
         }
     }
 
