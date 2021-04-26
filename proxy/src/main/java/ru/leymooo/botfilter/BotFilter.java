@@ -405,9 +405,9 @@ public class BotFilter
                 if ( !in.readLine().trim().equalsIgnoreCase( Settings.IMP.BOT_FILTER_VERSION ) )
                 {
 
-                    logger.log( Level.INFO, "§c[BotFilter] §aNew update available!");
-                    logger.log( Level.INFO, "§c[BotFilter] §aPlease update to latest version!");
-                    logger.log( Level.INFO, "§c[BotFilter] §aDownload from Github: https://github.com/Loyisa/BungeeCord/releases/");
+                    logger.log( Level.INFO, "§c[BotFilter] §aNew update available!" );
+                    logger.log( Level.INFO, "§c[BotFilter] §aPlease update to latest version!" );
+                    logger.log( Level.INFO, "§c[BotFilter] §aDownload from Github: https://github.com/Loyisa/BungeeCord/releases/" );
                     if ( startup )
                     {
                         Thread.sleep( 3500L );
