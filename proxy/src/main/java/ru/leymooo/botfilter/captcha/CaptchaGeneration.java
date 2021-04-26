@@ -67,7 +67,7 @@ public class CaptchaGeneration
         }
         CachedCaptcha.generated = true;
         executor.shutdownNow();
-        System.gc();
+        // System.gc(); // the garbage collector will handle it :)
         BungeeCord.getInstance().getLogger().log( Level.INFO, "[BotFilter] Captcha was generated in {0} ms", System.currentTimeMillis() - start );
     }
 
