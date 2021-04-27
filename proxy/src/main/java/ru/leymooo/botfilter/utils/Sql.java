@@ -52,7 +52,7 @@ public class Sql
             {
                 return;
             }
-            logger.info( "[BotFilter] Подключаюсь к датабазе..." );
+            logger.info( "[BotFilter] Connecting to the database..." );
             long start = System.currentTimeMillis();
             if ( Settings.IMP.SQL.STORAGE_TYPE.equalsIgnoreCase( "mysql" ) )
             {
@@ -63,7 +63,7 @@ public class Sql
                 Class.forName( "org.sqlite.JDBC" );
                 connectToDatabase( "JDBC:sqlite:BotFilter/database.db", null, null );
             }
-            logger.log( Level.INFO, "[BotFilter] Подключено ({0} мс)", System.currentTimeMillis() - start );
+            logger.log( Level.INFO, "[BotFilter] Database connected ({0} мс)", System.currentTimeMillis() - start );
             createTable();
             alterLastJoinColumn();
             clearOldUsers();
@@ -111,7 +111,7 @@ public class Sql
             }
         } catch ( Exception e )
         {
-            logger.log( Level.WARNING, "[BotFilter] Ошибка при добавлении столбца в таблицу", e );
+            logger.log( Level.WARNING, "[BotFilter] Error has occurred with adding a column to the table", e );
         }
     }
 
@@ -136,7 +136,7 @@ public class Sql
         {
             try ( PreparedStatement statement = connection.prepareStatement( "DELETE FROM `Users` WHERE `LastJoin` < " + until + ";" ) )
             {
-                logger.log( Level.INFO, "[BotFilter] Очищено {0} аккаунтов", statement.executeUpdate() );
+                logger.log( Level.INFO, "[BotFilter] Cleared {0} accounts", statement.executeUpdate() );
             }
         }
     }
@@ -162,7 +162,7 @@ public class Sql
                 botFilter.addUserToCache( botFilterUser );
                 i++;
             }
-            logger.log( Level.INFO, "[BotFilter] Белый список игроков успешно загружен ({0})", i );
+            logger.log( Level.INFO, "[BotFilter] Player whitelist loaded successfully ({0})", i );
         }
     }
 
@@ -216,7 +216,7 @@ public class Sql
                     }
                 } catch ( SQLException ex )
                 {
-                    logger.log( Level.WARNING, "[BotFilter] Не могу выполнить запрос к базе данных", ex );
+                    logger.log( Level.WARNING, "[BotFilter] Can't query the database", ex );
                     logger.log( Level.WARNING, sql );
                     executor.execute( () -> setupConnect() );
                 }
@@ -235,7 +235,7 @@ public class Sql
             } catch ( SQLException ex )
             {
                 setupConnect();
-                logger.log( Level.WARNING, "[BotFilter] Не могу очистить пользователей", ex );
+                logger.log( Level.WARNING, "[BotFilter] Can't clear user list", ex );
             }
         }
     }
