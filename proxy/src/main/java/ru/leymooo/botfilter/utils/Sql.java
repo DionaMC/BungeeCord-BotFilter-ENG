@@ -63,7 +63,7 @@ public class Sql
                 Class.forName( "org.sqlite.JDBC" );
                 connectToDatabase( "JDBC:sqlite:BotFilter/database.db", null, null );
             }
-            logger.log( Level.INFO, "[BotFilter] Database connected ({0} мс)", System.currentTimeMillis() - start );
+            logger.log( Level.INFO, "[BotFilter] Database connected ({0} ms)", System.currentTimeMillis() - start );
             createTable();
             alterLastJoinColumn();
             clearOldUsers();
