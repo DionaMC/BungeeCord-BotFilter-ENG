@@ -93,7 +93,7 @@ public class Config
             }
         } catch ( IOException ex )
         {
-            BungeeCord.getInstance().getLogger().log( Level.WARNING, "[BotFilter] Не могу загрузить конфиг ", ex );
+            BungeeCord.getInstance().getLogger().log( Level.WARNING, "[BotFilter] Can't load the configuration ", ex );
             return false;
         }
         set( yml, "" );
