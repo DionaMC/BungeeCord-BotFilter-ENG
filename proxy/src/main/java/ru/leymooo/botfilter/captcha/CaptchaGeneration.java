@@ -54,7 +54,7 @@ public class CaptchaGeneration
         ThreadPoolExecutor ex = (ThreadPoolExecutor) executor;
         while ( ex.getActiveCount() != 0 )
         {
-            BungeeCord.getInstance().getLogger().log( Level.INFO, "[BotFilter] Generating Captchas... [{0}/900]", 900 - ex.getQueue().size() - ex.getActiveCount() );
+            BungeeCord.getInstance().getLogger().log( Level.INFO, "[BotFilter] Generating Captcha... [{0}/900]", 900 - ex.getQueue().size() - ex.getActiveCount() );
             try
             {
                 Thread.sleep( 1000L );
@@ -68,7 +68,7 @@ public class CaptchaGeneration
         CachedCaptcha.generated = true;
         executor.shutdownNow();
         // System.gc(); // the garbage collector will handle it :)
-        BungeeCord.getInstance().getLogger().log( Level.INFO, "[BotFilter] Captchas was generated in {0} ms", System.currentTimeMillis() - start );
+        BungeeCord.getInstance().getLogger().log( Level.INFO, "[BotFilter] Captcha was generated in {0} ms", System.currentTimeMillis() - start );
     }
 
 
