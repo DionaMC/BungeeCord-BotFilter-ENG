@@ -35,30 +35,30 @@ public class BotFilterCommand extends Command
         if ( args.length == 0 )
         {
             sender.sendMessage( "§r--------------- §bBotFilter §cv" + Settings.IMP.BOT_FILTER_VERSION + "§r-----------------" );
-            sender.sendMessage( "§r> §lbotfilter reload §6- §aПерезагружить конфиг" );
-            sender.sendMessage( "§r> §lbotfilter stat §6- §aПоказать статистику" );
-            sender.sendMessage( "§r> §lbotfilter export §6- §aВыгрузить список игроков, которые прошли проверку" );
-            sender.sendMessage( "§r> §lbotfilter protection on/off §6- §aВключить или выключить ручной режим 'под атакой'" );
+            sender.sendMessage( "§r> §lbotfilter reload §6- §aReload the configuration" );
+            sender.sendMessage( "§r> §lbotfilter stat §6- §aShow statistics" );
+            sender.sendMessage( "§r> §lbotfilter export §6- §aExport player list what passed the bot filter" );
+            sender.sendMessage( "§r> §lbotfilter protection on/off §6- §aEnable or disable manual mode 'under attack'" );
             sender.sendMessage( "§r--------------- §bBotFilter §r-----------------" );
         } else if ( args[0].equalsIgnoreCase( "reload" ) )
         {
             BungeeCord.getInstance().getBotFilter().disable();
             BungeeCord.getInstance().setBotFilter( new BotFilter( false ) );
-            sender.sendMessage( "§aКоманда выполнена" );
+            sender.sendMessage( "§aCommand executed" );
         } else if ( args[0].equalsIgnoreCase( "stat" ) || args[0].equalsIgnoreCase( "stats" ) || args[0].equalsIgnoreCase( "info" ) )
         {
             sendStat( sender );
         } else if ( args[0].equalsIgnoreCase( "export" ) )
         {
             export( sender, args );
-            sender.sendMessage( "§aКоманда выполнена" );
+            sender.sendMessage( "§aCommand executed" );
         } else if ( args[0].equalsIgnoreCase( "protection" ) )
         {
             if ( args.length >= 2 )
             {
                 boolean enable = args[1].equalsIgnoreCase( "on" );
                 BungeeCord.getInstance().getBotFilter().setForceProtectionEnabled( enable );
-                sender.sendMessage( "§aЗашита " + ( enable ? "включена" : "§cотключена" ) );
+                sender.sendMessage( "§aProtection " + ( enable ? "enabled" : "§cdisabled" ) );
             }
         }
     }
@@ -67,10 +67,11 @@ public class BotFilterCommand extends Command
     {
         BotFilter botFilter = BungeeCord.getInstance().getBotFilter();
         sender.sendMessage( "§r----------------- §bBotFilter §cv" + Settings.IMP.BOT_FILTER_VERSION + " §r-----------------" );
-        sender.sendMessage( "§r> §lОбнаружена атака: " + ( botFilter.isUnderAttack() ? "§cДа" : "§aНет" ) );
-        sender.sendMessage( "§r> §lБотов на проверке: " + botFilter.getOnlineOnFilter() );
-        sender.sendMessage( "§r> §lПрошло проверку: " + botFilter.getUsersCount() );
-        sender.sendMessage( "§r> §lСкачать BotFilter: http://www.rubukkit.org/threads/137038/" );
+        sender.sendMessage( "§r> §lUnder attack: " + ( botFilter.isUnderAttack() ? "§cYes" : "§aNo" ) );
+        sender.sendMessage( "§r> §lBots on checking: " + botFilter.getOnlineOnFilter() );
+        sender.sendMessage( "§r> §lVerified player(s): " + botFilter.getUsersCount() );
+        sender.sendMessage( "§r> §lDownload BotFilter(RUS): http://www.rubukkit.org/threads/137038/" );
+        sender.sendMessage( "§r> §lDownload BotFilter(ENG): https://github.com/LoyisaStinks/BungeeCord/" );
     }
 
     private void export(CommandSender sender, String[] args)
@@ -79,10 +80,10 @@ public class BotFilterCommand extends Command
 
         if ( args.length == 1 )
         {
-            sender.sendMessage( "§r> §lbotfilter export [TIME_IN_SECONDS] §6- §aвыгрузить список тех, кто прошёл"
-                + " проверку за указаное время. укажите ALL чтобы получить за всё время." );
-            sender.sendMessage( "§r> §lbotfilter export [TIME_IN_SECONDS] JOIN §6- §aвыгрузить список тех,"
-                + " кто зашёл на сервер за указанное время (Учитывает и тех кто  также и прошёл проверку)." );
+            sender.sendMessage( "§r> §lbotfilter export [TIME_IN_SECONDS] §6- §aExport the list of players what "
+                + "have passed the check for the specified time. Use \"ALL\" to get list for all the time" );
+            sender.sendMessage( "§r> §lbotfilter export [TIME_IN_SECONDS] JOIN §6- §aExport the list of players what "
+                + "have passed the check for the specified time. (Including players what have passed the check)" );
             return;
         }
         if ( args[1].equalsIgnoreCase( "all" ) )
@@ -120,7 +121,7 @@ public class BotFilterCommand extends Command
             exportToFile( out, join );
         } catch ( Exception e )
         {
-            sender.sendMessage( "§cУкажите число" );
+            sender.sendMessage( "§cPlease input a number value" );
         }
     }
 
