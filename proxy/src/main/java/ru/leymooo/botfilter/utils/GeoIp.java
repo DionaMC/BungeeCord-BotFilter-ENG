@@ -154,7 +154,7 @@ public class GeoIp
             LOGGER.log( Level.WARNING, "[BotFilter] Can't download GeoLite2 database", ex );
             return;
         }
-        LOGGER.log( Level.INFO, "[BotFilter] GeoLite2 загружена ({0}ms)", System.currentTimeMillis() - start );
+        LOGGER.log( Level.INFO, "[BotFilter] GeoLite2 database loaded ({0}ms)", System.currentTimeMillis() - start );
     }
 
     private void saveToFile(InputStream stream, File out) throws IOException
