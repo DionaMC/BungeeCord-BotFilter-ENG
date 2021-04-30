@@ -14,6 +14,6 @@ You can download this protection at [Releases](https://github.com/LoyisaStinks/B
 
 Credit
 --------
-[Leymooo](https://github.com/Leymooo) (Original BotFilter developer)
-[koloslolya](https://github.com/SleepyKolosLolya) (Help me translate BotFilter)
+[Leymooo](https://github.com/Leymooo) (Original BotFilter developer)<br>
+[koloslolya](https://github.com/SleepyKolosLolya) (Help me translate BotFilter)<br>
 [Maxsimuss](https://github.com/Maxsimuss) (Help me translate BotFilter)
