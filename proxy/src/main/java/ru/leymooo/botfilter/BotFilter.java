@@ -407,7 +407,7 @@ public class BotFilter
 
                     logger.log( Level.INFO, "§c[BotFilter] §aNew update available!" );
                     logger.log( Level.INFO, "§c[BotFilter] §aPlease update to latest version!" );
-                    logger.log( Level.INFO, "§c[BotFilter] §aDownload from Github: https://github.com/LoyisaStinks/BungeeCord/releases/" );
+                    logger.log( Level.INFO, "§c[BotFilter] §aDownload from Github: https://github.com/LoyisaStinks/BungeeCord-BotFilter-ENG/releases/" );
                     if ( startup )
                     {
                         Thread.sleep( 3500L );
