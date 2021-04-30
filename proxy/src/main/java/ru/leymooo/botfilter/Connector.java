@@ -193,7 +193,7 @@ public class Connector extends MoveHandler
         userConnection.setNeedLogin( false );
         userConnection.getPendingConnection().finishLogin( userConnection, true );
         markDisconnected = true;
-        LOGGER.log( Level.INFO, "[BotFilter] Игрок (" + name + "|" + ip + ") успешно прошёл проверку" );
+        LOGGER.log( Level.INFO, "[BotFilter] Player (" + name + "|" + ip + ") passed verification successfully" );
     }
 
     @Override
