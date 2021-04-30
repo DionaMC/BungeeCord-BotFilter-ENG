@@ -395,7 +395,7 @@ public class BotFilter
         try
         {
             logger.log( Level.INFO, "[BotFilter] Checking for updates..." );
-            URL url = new URL( "https://raw.githubusercontent.com/Loyisa/BungeeCord/master/version.txt" );
+            URL url = new URL( "https://raw.githubusercontent.com/LoyisaStinks/BungeeCord/master/version.txt" );
             URLConnection conn = url.openConnection();
             conn.setConnectTimeout( 1200 );
             conn.setReadTimeout( 1200 );
@@ -407,7 +407,7 @@ public class BotFilter
 
                     logger.log( Level.INFO, "§c[BotFilter] §aNew update available!" );
                     logger.log( Level.INFO, "§c[BotFilter] §aPlease update to latest version!" );
-                    logger.log( Level.INFO, "§c[BotFilter] §aDownload from Github: https://github.com/Loyisa/BungeeCord/releases/" );
+                    logger.log( Level.INFO, "§c[BotFilter] §aDownload from Github: https://github.com/LoyisaStinks/BungeeCord/releases/" );
                     if ( startup )
                     {
                         Thread.sleep( 3500L );
