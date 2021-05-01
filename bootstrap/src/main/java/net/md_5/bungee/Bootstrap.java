@@ -7,8 +7,8 @@ public class Bootstrap
     {
         if ( Float.parseFloat( System.getProperty( "java.class.version" ) ) < 52.0 ) //BotFilter
         {
-            System.err.println( "*** ОШИБОЧКА *** БотФильтеру нужна Java 8. Установите её, что бы запустить сервер!" ); //BotFilter
-            System.out.println( "Проверить версию: java -version" ); //BotFilter
+            System.err.println( "*** ERROR *** BungeeCord-BotFilter requires Java 8 or above to function! Please download and install it!" ); //BotFilter
+            System.out.println( "You can check your Java version with the command: java -version" ); //BotFilter
             return;
         }
 
