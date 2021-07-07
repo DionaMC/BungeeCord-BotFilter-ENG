@@ -35,6 +35,7 @@ public class ProtocolConstants
     public static final int MINECRAFT_1_16_3 = 753;
     public static final int MINECRAFT_1_16_4 = 754;
     public static final int MINECRAFT_1_17 = 755;
+    public static final int MINECRAFT_1_17_1 = 756;
     public static final List<String> SUPPORTED_VERSIONS;
     public static final List<Integer> SUPPORTED_VERSION_IDS;
 
@@ -80,7 +81,8 @@ public class ProtocolConstants
                 ProtocolConstants.MINECRAFT_1_16_2,
                 ProtocolConstants.MINECRAFT_1_16_3,
                 ProtocolConstants.MINECRAFT_1_16_4,
-                ProtocolConstants.MINECRAFT_1_17
+                ProtocolConstants.MINECRAFT_1_17,
+                ProtocolConstants.MINECRAFT_1_17_1
         );
 
         if ( SNAPSHOT_SUPPORT )
@@ -91,6 +93,11 @@ public class ProtocolConstants
 
         SUPPORTED_VERSIONS = supportedVersions.build();
         SUPPORTED_VERSION_IDS = supportedVersionIds.build();
+    }
+
+    public static int getLastSupportedProtocol() //BotFilter
+    {
+        return SUPPORTED_VERSION_IDS.get( SUPPORTED_VERSION_IDS.size() - 1 );
     }
 
     public enum Direction
