@@ -5,16 +5,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Settings extends Config
-{
+public class Settings extends Config {
 
     @Ignore
     public static final Settings IMP = new Settings();
 
     @Comment(
-        {
-            "Please submit all errors, bugs, suggestions and other requests on github\n "
-        })
+            {
+                    "Please submit all errors, bugs, suggestions and other requests on github\n "
+            })
     @Final
     public final String ISSUES = "https://github.com/Leymooo/BungeeCord/issues";
     @Final
@@ -35,12 +34,12 @@ public class Settings extends Config
     @Create
     public SQL SQL;
     @Comment(
-        {
-            "How many players / bots should join in a minute, to enable the protection\n",
-            "Recommended settings without advertising: ",
-            "Under 150 players - 25, under 250 - 30, under 350 - 35, under 550 - 40,45, higher - adjust for yourself "
-            // "Во время рекламы или когда токо, токо поставили защиту рекомендуется повышать эти значения"
-        })
+            {
+                    "How many players / bots should join in a minute, to enable the protection\n",
+                    "Recommended settings without advertising: ",
+                    "Under 150 players - 25, under 250 - 30, under 350 - 35, under 550 - 40,45, higher - adjust for yourself "
+                    // "Во время рекламы или когда токо, токо поставили защиту рекомендуется повышать эти значения"
+            })
     public int PROTECTION_THRESHOLD = 30;
 
     @Comment("How long is automatic protection active? In milliseconds. 1 second = 1000")
@@ -61,15 +60,13 @@ public class Settings extends Config
     @Comment("Should the IP addresses of the players / bots who failed the verification be logged to a file?")
     public boolean SAVE_FAILED_IPS_TO_FILE = true;
 
-    public void reload(File file)
-    {
-        load( file );
-        save( file );
+    public void reload(File file) {
+        load(file);
+        save(file);
     }
 
     @Comment("Please don't use '\\n', use %nl%")
-    public static class MESSAGES
-    {
+    public static class MESSAGES {
 
         public String PREFIX = "&b&lBot&d&lFilter";
         public String CHECKING = "%prefix%&7>> &aWait for verification to complete...";
@@ -81,140 +78,132 @@ public class Settings extends Config
         public String KICK_COUNTRY = "%prefix%%nl%%nl%&cYour country is banned from the server";
         public String KICK_BIG_PING = "%prefix%%nl%%nl%&cYour ping is very high, most likely you are a bot";
         @Comment(
-            {
-                "Title%nl%Subtitle", "You can leave blank to disable the title (ex: CHECKING_TITLE = \"\") ",
-                "Disabling titles may slightly improve performance"
-            })
+                {
+                        "Title%nl%Subtitle", "You can leave blank to disable the title (ex: CHECKING_TITLE = \"\") ",
+                        "Disabling titles may slightly improve performance"
+                })
         public String CHECKING_TITLE = "&r&lBot&b&lFilter%nl%&aChecking...";
         public String CHECKING_TITLE_SUS = "&rПроверка пройдена%nl%&aHave a good game";
         public String CHECKING_TITLE_CAPTCHA = " %nl%&rEnter the captcha into the chat!";
     }
 
-    @Create
-    public GEO_IP GEO_IP;
-
     @Comment("Enable or disable GeoIp")
-    public static class GEO_IP
-    {
+    public static class GEO_IP {
 
         @Comment(
-            {
-                "When the check works",
-                "0 - Always",
-                "1 - Only during bot attacks",
-                "2 - Disable"
-            })
+                {
+                        "When the check works",
+                        "0 - Always",
+                        "1 - Only during bot attacks",
+                        "2 - Disable"
+                })
         public int MODE = 1;
         @Comment(
-            {
-                "How exactly GeoIp works",
-                "0 - White list(Only those countries that are on the list can join)",
-                "1 - Black list(Only countries that are not on the list can join)"
-            })
+                {
+                        "How exactly GeoIp works",
+                        "0 - White list(Only those countries that are on the list can join)",
+                        "1 - Black list(Only countries that are not on the list can join)"
+                })
         public int TYPE = 0;
         @Comment(
-            {
-                "Where to download GEOIP from",
-                "Change the link if for some reason it doesn't download from this one",
-                "The file must end in .mmdb or be packed into .tar.gz"
-            })
+                {
+                        "Where to download GEOIP from",
+                        "Change the link if for some reason it doesn't download from this one",
+                        "The file must end in .mmdb or be packed into .tar.gz"
+                })
         public String NEW_GEOIP_DOWNLOAD_URL = "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&license_key=%license_key%&suffix=tar.gz";
         @Comment(
-            {
-                "If the key stops working, you need to register at https://www.maxmind.com/",
-                "and generate a new key here https://www.maxmind.com/en/accounts/current/license-key"
-            })
+                {
+                        "If the key stops working, you need to register at https://www.maxmind.com/",
+                        "and generate a new key here https://www.maxmind.com/en/accounts/current/license-key"
+                })
         public String MAXMIND_LICENSE_KEY = "P5g0fVdAQIq8yQau";
         @Comment("Countries list")
-        public List<String> COUNTRIES_LIST = Arrays.asList( "RU", "UA", "BY", "KZ", "EE", "MD", "KG", "AZ", "LT", "LV", "GE", "PL" );
+        public List<String> COUNTRIES_LIST = Arrays.asList("RU", "UA", "BY", "KZ", "EE", "MD", "KG", "AZ", "LT", "LV", "GE", "PL");
     }
 
     @Comment("Enable or disable high ping check")
-    public static class PING_CHECK
-    {
+    public static class PING_CHECK {
 
         @Comment(
-            {
-                "When the check works",
-                "0 - Always",
-                "1 - Only during bot attacks",
-                "2 - Disable"
-            })
+                {
+                        "When the check works",
+                        "0 - Always",
+                        "1 - Only during bot attacks",
+                        "2 - Disable"
+                })
         public int MODE = 1;
         @Comment("Maximum allowed ping")
         public int MAX_PING = 350;
     }
 
     @Comment("Enable or disable Direct Connect Verification")
-    public static class SERVER_PING_CHECK
-    {
+    public static class SERVER_PING_CHECK {
 
         @Comment(
-            {
-                "When the check works",
-                "0 - Always",
-                "1 - Only during bot attacks",
-                "2 - Disable",
-                "Disabled by default, because it is very unstable against strong attacks"
-            })
+                {
+                        "When the check works",
+                        "0 - Always",
+                        "1 - Only during bot attacks",
+                        "2 - Disable",
+                        "Disabled by default, because it is very unstable against strong attacks"
+                })
         public int MODE = 2;
         @Comment("When is it allowed to join the server after receiving server's motd")
         public int CACHE_TIME = 12;
-        public List<String> KICK_MESSAGE = new ArrayList()
-        {
+        public List<String> KICK_MESSAGE = new ArrayList() {
             {
-                add( "%nl%" );
-                add( "%nl%" );
-                add( "&cYou've been kicked! Please don't use direct connection" );
-                add( "%nl%" );
-                add( "%nl%" );
-                add( "&bДля того чтобы зайти на сервер:" );
-                add( "%nl%" );
-                add( "&71) &rAdd the server to the &lserver list." );
-                add( "%nl%" );
-                add( "&lOur IP &8>> &b&lIP" );
-                add( "%nl%" );
-                add( "%nl%" );
-                add( "&72) &rRefresh the server list. " );
-                add( "%nl%" );
-                add( "&oTo refresh it, click the &c&lRefresh&r button" );
-                add( "%nl%" );
-                add( "%nl%" );
-                add( "&73) &rWait &c1-3&r seconds and join the server!" );
+                add("%nl%");
+                add("%nl%");
+                add("&cYou've been kicked! Please don't use direct connection");
+                add("%nl%");
+                add("%nl%");
+                add("&bДля того чтобы зайти на сервер:");
+                add("%nl%");
+                add("&71) &rAdd the server to the &lserver list.");
+                add("%nl%");
+                add("&lOur IP &8>> &b&lIP");
+                add("%nl%");
+                add("%nl%");
+                add("&72) &rRefresh the server list. ");
+                add("%nl%");
+                add("&oTo refresh it, click the &c&lRefresh&r button");
+                add("%nl%");
+                add("%nl%");
+                add("&73) &rWait &c1-3&r seconds and join the server!");
 
             }
         };
     }
 
     @Comment(
-        {
-            "Setting up exactly how the protection will work",
-            "0 - Only check with captcha",
-            "1 - Fall check + captcha",
-            "2 - Fall check, if it failed, then captcha"
-        })
-    public static class PROTECTION
-    {
+            {
+                    "Setting up exactly how the protection will work",
+                    "0 - Only check with captcha",
+                    "1 - Fall check + captcha",
+                    "2 - Fall check, if it failed, then captcha"
+            })
+    public static class PROTECTION {
 
         @Comment("Operation mode while there is no attack")
         public int NORMAL = 2;
         @Comment("Operation mode during the attack")
         public int ON_ATTACK = 1;
         @Comment(
-            {
-                "Enable constant checking of the players?",
-                "When enabling this feature, don't forget to set the protection-threshold value higher"
-            })
+                {
+                        "Enable constant checking of the players?",
+                        "When enabling this feature, don't forget to set the protection-threshold value higher"
+                })
         public boolean ALWAYS_CHECK = false;
 
         @Comment(
-            {
-                "Check players with ip 127.0.0.1?",
-                "May be useful when using Geyser",
-                "0 - check",
-                "1 - don't check",
-                "2 - check every time"
-            })
+                {
+                        "Check players with ip 127.0.0.1?",
+                        "May be useful when using Geyser",
+                        "0 - check",
+                        "1 - don't check",
+                        "2 - check every time"
+                })
         public int CHECK_LOCALHOST = 0;
         /*
         @Comment(
@@ -230,8 +219,7 @@ public class Settings extends Config
     }
 
     @Comment("Database configuration")
-    public static class SQL
-    {
+    public static class SQL {
 
         @Comment("Database type. sqlite or mysql")
         public String STORAGE_TYPE = "sqlite";
