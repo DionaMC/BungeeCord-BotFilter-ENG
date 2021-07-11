@@ -200,8 +200,8 @@ public class Settings extends Config
 
         @Comment(
             {
-            "Check players with ip 127.0.0.1?","May be useful when using Geyser",
-            "0 - check","1 - don't check","2 - check every time"
+            "Check players with ip 127.0.0.1?", "May be useful when using Geyser",
+            "0 - check", "1 - don't check", "2 - check every time"
             })
         public int CHECK_LOCALHOST = 0;
         /*
