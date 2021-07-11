@@ -46,7 +46,7 @@ public class GeoIp
     {
         if ( enabled )
         {
-            countries.addAll( Settings.IMP.GEO_IP.COUNTRIES_LIST );
+            countries.addAll( Settings.IMP.GEO_IP.ALLOWED_COUNTRIES );
             setupDataBase( startup );
             cached = CacheBuilder.newBuilder()
                     .concurrencyLevel( Runtime.getRuntime().availableProcessors() )

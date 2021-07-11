@@ -58,7 +58,7 @@ public class Settings extends Config
     public void reload(File file)
     {
         load( file );
-        save (file );
+        save( file );
     }
 
     @Comment("Please don't use '\\n', use %nl%")
