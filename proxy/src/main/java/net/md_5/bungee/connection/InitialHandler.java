@@ -9,7 +9,8 @@ import java.net.SocketAddress;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Level;
 import javax.crypto.SecretKey;
@@ -65,9 +66,7 @@ import net.md_5.bungee.protocol.packet.PluginMessage;
 import net.md_5.bungee.protocol.packet.StatusRequest;
 import net.md_5.bungee.protocol.packet.StatusResponse;
 import net.md_5.bungee.util.AllowedCharacters;
-import net.md_5.bungee.util.BoundedArrayList;
 import net.md_5.bungee.util.QuietException;
-import ru.leymooo.botfilter.config.Settings;
 import ru.leymooo.botfilter.utils.FastException;
 import ru.leymooo.botfilter.utils.IPUtils;
 import ru.leymooo.botfilter.utils.PingLimiter;
@@ -87,7 +86,9 @@ public class InitialHandler extends PacketHandler implements PendingConnection
     private LoginRequest loginRequest;
     private EncryptionRequest request;
     @Getter
-    private final List<PluginMessage> relayMessages = new BoundedArrayList<>( 128 );
+    private PluginMessage brandMessage;
+    @Getter
+    private final Set<String> registeredChannels = new HashSet<>();
     private State thisState = State.HANDSHAKE;
     private final Unsafe unsafe = new Unsafe()
     {
@@ -160,11 +161,7 @@ public class InitialHandler extends PacketHandler implements PendingConnection
     @Override
     public void handle(PluginMessage pluginMessage) throws Exception
     {
-        // TODO: Unregister?
-        if ( PluginMessage.SHOULD_RELAY.apply( pluginMessage ) )
-        {
-            relayMessages.add( pluginMessage );
-        }
+        this.relayMessage( pluginMessage );
     }
 
     @Override
@@ -550,7 +547,7 @@ public class InitialHandler extends PacketHandler implements PendingConnection
 
         sendLoginSuccess( sendLoginSuccess );
 
-        if ( Settings.IMP.PROTECTION.ALWAYS_CHECK || bungee.getBotFilter().needCheck( getName(), getAddress().getAddress() ) )
+        if ( bungee.getBotFilter().needCheck( this ) )
         {
             sendLoginSuccess( !sendLoginSuccess ); //Send a loginSuccess if sendLoginSuccess is false
             bungee.getBotFilter().connectToBotFilter( userCon );
@@ -622,7 +619,8 @@ public class InitialHandler extends PacketHandler implements PendingConnection
     {
         if ( send )
         {
-            unsafe.sendPacket( new LoginSuccess( getUniqueId(), getName() ) );
+            LoginSuccess packet = new LoginSuccess( getUniqueId(), getName() );
+            unsafe.sendPacket( packet );
         }
     }
 
@@ -755,5 +753,40 @@ public class InitialHandler extends PacketHandler implements PendingConnection
             throw new FastException( errorMessage );
         }
     }
-    //BotFilter end
+
+    public void relayMessage(PluginMessage input) throws Exception
+    {
+        relayMessage0( input );
+    }
+
+    public boolean relayMessage0(PluginMessage input) throws Exception
+    {
+        if ( input.getTag().equals( "REGISTER" ) || input.getTag().equals( "minecraft:register" ) )
+        {
+            String content = new String( input.getData(), StandardCharsets.UTF_8 );
+
+            for ( String id : content.split( "\0" ) )
+            {
+                Preconditions.checkState( registeredChannels.size() < 128, "Too many registered channels" );
+                Preconditions.checkArgument( id.length() < 128, "Channel name too long" );
+
+                registeredChannels.add( id );
+            }
+            return true;
+        } else if ( input.getTag().equals( "UNREGISTER" ) || input.getTag().equals( "minecraft:unregister" ) )
+        {
+            String content = new String( input.getData(), StandardCharsets.UTF_8 );
+
+            for ( String id : content.split( "\0" ) )
+            {
+                registeredChannels.remove( id );
+            }
+            return true;
+        } else if ( input.getTag().equals( "MC|Brand" ) || input.getTag().equals( "minecraft:brand" ) )
+        {
+            brandMessage = input;
+            return true;
+        }
+        return false;
+    }
 }

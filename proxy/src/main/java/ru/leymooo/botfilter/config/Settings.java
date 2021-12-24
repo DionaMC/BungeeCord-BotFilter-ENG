@@ -20,7 +20,7 @@ public class Settings extends Config
     @Final
     public final String HELP = "http://www.rubukkit.org/threads/137038/";
     @Final
-    public String BOT_FILTER_VERSION = "3.8.9-dev";
+    public String BOT_FILTER_VERSION = "3.8.9";
 
     @Create
     public MESSAGES MESSAGES;
@@ -204,6 +204,9 @@ public class Settings extends Config
             "0 - check", "1 - don't check", "2 - check every time"
             })
         public int CHECK_LOCALHOST = 0;
+
+        @Comment("Отключить ли проверку для клиентов с Geyser-standalone? Тип авторищации должен быть floodgate.")
+        public boolean SKIP_GEYSER = false;
         /*
         @Comment(
                 {
