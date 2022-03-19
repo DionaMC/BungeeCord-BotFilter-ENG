@@ -29,6 +29,7 @@ import net.md_5.bungee.connection.PingHandler;
 import net.md_5.bungee.netty.HandlerBoss;
 import net.md_5.bungee.netty.PipelineUtils;
 import net.md_5.bungee.protocol.DefinedPacket;
+import net.md_5.bungee.protocol.Varint21FrameDecoder;
 import net.md_5.bungee.protocol.packet.PluginMessage;
 
 // CHECKSTYLE:OFF
@@ -154,7 +155,7 @@ public class BungeeServerInfo implements ServerInfo
         Preconditions.checkNotNull( callback, "callback" );
 
         int pingCache = ProxyServer.getInstance().getConfig().getRemotePingCache();
-        if ( pingCache > 0 && cachedPing != null && ( lastPing - System.currentTimeMillis() ) > pingCache )
+        if ( pingCache > 0 && cachedPing != null && ( System.currentTimeMillis() - lastPing ) > pingCache )
         {
             cachedPing = null;
         }
@@ -172,6 +173,7 @@ public class BungeeServerInfo implements ServerInfo
             {
                 if ( future.isSuccess() )
                 {
+                    future.channel().pipeline().get( Varint21FrameDecoder.class ).setFromBackend( true ); //BotFilter
                     future.channel().pipeline().get( HandlerBoss.class ).setHandler( new PingHandler( BungeeServerInfo.this, callback, protocolVersion ) );
                 } else
                 {
