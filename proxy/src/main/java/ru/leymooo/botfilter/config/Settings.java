@@ -20,10 +20,12 @@ public class Settings extends Config
     @Final
     public final String HELP = "http://www.rubukkit.org/threads/137038/";
     @Final
-    public String BOT_FILTER_VERSION = "3.8.11";
+    public String BOT_FILTER_VERSION = "3.8.12-dev";
 
     @Create
     public MESSAGES MESSAGES;
+    @Create
+    public DIMENSIONS DIMENSIONS;
     @Create
     public GEO_IP GEO_IP;
     @Create
@@ -234,5 +236,18 @@ public class Settings extends Config
         public String USER = "user";
         public String PASSWORD = "password";
         public String DATABASE = "database";
+    }
+
+    @Comment("Настройка виртуального мира")
+    public static class DIMENSIONS
+    {
+        @Comment(
+            {
+            "Какой мир использовать",
+            "0 - Обычный мир",
+            "1 - Ад",
+            "2 - Энд"
+            })
+        public int TYPE = 0;
     }
 }
